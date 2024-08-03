@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd 
 
 from src.exception import CustomException 
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 def save_object(file_path,obj):
 
@@ -24,3 +25,31 @@ def save_object(file_path,obj):
 
         raise CustomException(e,sys)
 
+def evaluate_model(x_train,y_train,x_test,y_test,models):
+        
+        report = {}
+
+        for i in range(len(list(models))):
+
+            model = list(models.values())[i]
+
+            # train the model
+
+            model.fit(x_train,y_train)  
+
+            y_train_pred = model.predict(x_train)
+
+            y_test_pred =  model.predict(x_test)
+
+            # model_train_mae,model_train_mse, model_train_rmse, 
+            
+            model_train_r2 = r2_score(y_train,y_train_pred)
+            # model_test_mae,model_test_mse, model_test_rmse, 
+            
+            model_test_r2 = r2_score(y_test,y_test_pred)
+
+            
+
+            report[list(models.keys())[i]] = model_test_r2
+
+        return report
