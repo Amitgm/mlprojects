@@ -38,6 +38,9 @@ class DataTransformation:
             num_features = input_features.select_dtypes(exclude="object").columns
             cat_features = input_features.select_dtypes(include="object").columns
 
+            print("the num fetures",num_features)
+            print("the cat features",cat_features)
+
 
             num_pipelines = Pipeline(
 

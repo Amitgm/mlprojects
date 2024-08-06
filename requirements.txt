@@ -6,5 +6,6 @@ scikit-learn
 xgboost
 catboost
 dill
+flask
 # to enable setup.py to run to build the packages
 # -e .
